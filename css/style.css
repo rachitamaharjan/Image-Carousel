@@ -1,0 +1,53 @@
+.carousel-container{
+    width: 800px;
+
+    overflow: hidden;
+    text-align: center;
+}
+
+img{
+    width: 800px;
+    height: 400px;
+}
+
+.indicator-container{
+    margin: -30px 0 30px 0;
+}
+
+.indicator{
+    border-radius: 50%;
+    border-width: 1px;
+    width: 15px;
+    height: 15px;
+    border: #333333;
+    border-style: solid;
+    background-color: white;
+    margin: 0 2px;
+}
+
+.indicator:hover{
+    background-color: #333333;
+    cursor: pointer;
+}
+
+.indicator:active{
+    background-color: #333333;
+}
+
+#previous, #next{
+    border: none;
+    background-color: unset;
+    color: white;
+    border-radius: 5px;
+    font-size: 50px;
+    top: 43%;
+    padding: 0px 10px 10px 10px;
+}
+
+#previous:hover, #next:hover{
+    color: white;
+    border-radius: 5px;
+    background-color: #333333;
+    cursor: pointer;
+}
+

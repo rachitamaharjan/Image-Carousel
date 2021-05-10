@@ -1,0 +1,25 @@
+.carousel-container{
+    margin-top: 10%;
+    position: relative;
+}
+
+.carousel-image-wrapper{
+    display: flex;
+}
+
+#previous, #next{
+    position: absolute;
+}
+
+#previous{
+    left: 10px;
+}
+
+#next{
+    right: 10px;
+}
+
+#indicator{
+    display: inline-block;
+}
+
