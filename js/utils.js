@@ -1,7 +1,24 @@
 var imgContainer = document.getElementsByClassName('carousel-container')
 var imgWrapper = document.getElementsByClassName('carousel-image-wrapper')
 var imgVar = document.getElementsByTagName('img')
-var 
+var indexNext = 0
+var indexPrev = imgVar.length
+
+
+function changeIndex(val){
+    console.log('val',val)
+    if (val == 'next'){
+        ++indexNext
+        console.log('indexNext',indexNext)
+        return indexNext
+    }
+    else if(val == 'prev'){
+        indexPrev--
+        console.log('indexPrev',indexPrev)
+        return indexPrev
+    }
+    // return 0
+}
 
 // previous and nextSlide
 var previousSlide = document.createElement('button');
@@ -22,23 +39,5 @@ for(i=0; i<imgVar.length; i++){
     indicator.className = "indicator";
     indicatorContainer.appendChild(indicator);
 }
-console.log('jj',imgWrapper[0]);
-console.log('next',nextSlide)
-previousSlide.onclick = function() {
-    console.log('next',document.getElementById('next').onclick)
-    increment = 0
-    console.log('kk',imgVar[0].width)
 
-    setInterval(function() {
-        
-        
-        if (increment<imgVar[0].width){
-            increment = increment + 10;
-            imgWrapper[0].style.marginLeft =  increment+'px'
-            console.log(imgWrapper[0].style.marginLeft)
-        }
-            
-            // console.log('jj',increment);
-        // }
-    }, 25);
-}
+
