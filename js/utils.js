@@ -6,23 +6,17 @@ var indexPrev = imgVar.length
 
 imgWrapper[0].style.marginLeft = '0px'
 
-function changeIndex(val){
-    console.log('val',val)
-    if (val == 'next'){
-        ++indexNext
-        if (indexNext > imgVar.length){
-            indexNext = 1
-        }
-        console.log('indexNext',indexNext)
-        return indexNext
-    }
-    else if(val == 'prev'){
-        indexPrev--
-        console.log('indexPrev',indexPrev)
-        return indexPrev
-    }
-    // return 0
-}
+console.log('imgg',imgVar[0].src)
+var imgStart = document.createElement("img");
+var imgEnd = document.createElement("img");
+imgStart.id = 'imgStart'
+imgEnd.id = 'imgEnd'
+imgStart.src = imgVar[0].src
+imgEnd.src = imgVar[3].src
+imgWrapper[0].appendChild(imgStart)
+imgWrapper[0].appendChild(imgEnd)
+imgVar[0].before(imgEnd)
+
 
 // previous and nextSlide
 var previousSlide = document.createElement('button');
@@ -46,48 +40,36 @@ for(i=0; i<imgVar.length; i++){
 
 
 
-nextSlide.onclick = function() {
-    // imgWrapper[0].width = imgVar[0].width*imgVar.length
-    var index = changeIndex('next')
-    console.log('index',index)
-    increment = (imgVar[index % imgVar.length].width) * (index - 1)
-    console.log('increment',increment)
-    console.log('index % imgVar.length',index % imgVar.length)
+var increment = 1
+imgWrapper[0].style.transform = 'translateX( ' + (-imgVar[0].width*increment)+'px)' 
 
-    if (index > index % imgVar.length){
-        imgWrapper[0].style.marginLeft = '0px'
-    }
-    setInterval(function() {
-        if (increment < ((imgVar[index % imgVar.length].width) * (index % imgVar.length))){
-            increment += 25;
-            imgWrapper[0].style.marginLeft = '-' + increment + 'px'
-            // console.log('position',imgWrapper[0].style.marginLeft)
-        }
-    }, 25);
+nextSlide.onclick = function() {
+    imgWrapper[0].style.transition = 'transform 0.4s ease-in-out' 
+    increment++
+    imgWrapper[0].style.transform = 'translateX( ' + (-imgVar[0].width*increment)+'px)' 
 }
+
+
+// imgWrapper[0].style.transform = 'translateX( ' + (-imgVar[0].width*increment)+'px)' 
 
 previousSlide.onclick = function() {
-
     
-    console.log('o',imgWrapper[0].style.marginLeft)
-    console.log('next',document.getElementById('next').onclick)
-    increment = 0
-    console.log('imgvar width',imgVar[0].width)
-    console.log('changeindex',changeIndex('prev'))
-    var index = changeIndex('prev')
-    // if (imgWrapper[0].style.marginLeft == '0px'){
-    //     imgWrapper[0].style.marginLeft = '-' + (imgVar[index].width * imgVar.length)+'px'
-    //     console.log('imgwrapper1',imgWrapper[0].style.marginLeft)
-    //     console.log('1',imgVar[index].width * imgVar.length)
-    //     console.log('2',imgVar.length)
-    // }
-    setInterval(function() {
-        if (increment<imgVar[index].width){
-            increment = increment + 25;
-            imgWrapper[0].style.marginLeft =  increment + 'px'
-            // console.log(imgWrapper[0].style.marginLeft)
-        }
-    }, 25);
+    imgWrapper[0].style.transition = 'transform 0.4s ease-in-out' 
+    increment--
+    imgWrapper[0].style.transform = 'translateX( ' + (-imgVar[0].width*increment)+'px)' 
 }
 
+imgWrapper[0].addEventListener('transitionend',stopTransition)
 
+function stopTransition(){
+    if(imgVar[increment].id == 'imgEnd'){
+        imgWrapper[0].style.transition = 'none'
+        increment = imgVar.length - 2
+        imgWrapper[0].style.transform = 'translateX( ' + (-imgVar[0].width*increment)+'px)' 
+    }
+    if(imgVar[increment].id == 'imgStart'){
+        imgWrapper[0].style.transition = 'none'
+        increment = imgVar.length - increment
+        imgWrapper[0].style.transform = 'translateX( ' + (-imgVar[0].width*increment)+'px)' 
+    }
+}
